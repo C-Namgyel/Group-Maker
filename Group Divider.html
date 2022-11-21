@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title>Group Divider</title>
+    </head>
+    <body style="zoom: 300%">
+        
+    </body>
+    <script>
+function randomNumber(min, max) {
+    return(Math.floor(Math.random()*(max - min + 1) + min))
+}
+var std = prompt("Number of students")
+var grp = prompt("Number of groups")
+var arr = {}
+for (i = 1; i <= grp; i++) {
+    arr['Group '+i] = []
+}
+num = 1
+picked = []
+for (x = 0; x < std; x++) {
+    let rand = randomNumber(1, std)
+    if (picked.indexOf(rand) == -1) {
+        arr['Group '+num].push(rand)
+        picked.push(rand)
+    } else {
+        num--
+        x--
+    }
+    num++
+    if (num > grp) {
+        num = 1;
+    }
+}
+for (s = 1; s <= grp; s++) {
+    arr['Group '+s].sort(function(a, b){return a-b})
+}
+for (g = 1; g <= grp; g++) {
+    let elem = document.createElement("div");
+    elem.style.textAlign = "center"
+    elem.style.borderStyle = "solid"
+    elem.innerHTML = "<b>Group "+g+"</b><br>"
+    for (z = 0; z < arr['Group '+g].length; z++) {
+        elem.innerHTML = elem.innerHTML + arr['Group '+g][z] + "<br>"
+    }
+    document.body.appendChild(elem)
+    document.body.appendChild(document.createElement("br"))
+}
+    </script>
+</html>
